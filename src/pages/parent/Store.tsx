@@ -52,7 +52,7 @@ export const Store = () => {
           <ShoppingCart className="w-4 h-4 mr-2" />
           Cart
           {getTotalItems() > 0 && (
-            <Badge className="absolute -top-2 -right-2 px-2 py-1 text-xs bg-secondary">
+            <Badge className="absolute -top-2 -right-2 min-w-[1.25rem] h-5 px-1 py-0 text-xs bg-secondary text-secondary-foreground rounded-full flex items-center justify-center">
               {getTotalItems()}
             </Badge>
           )}
@@ -125,7 +125,7 @@ export const Store = () => {
                 
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-2xl font-bold font-inter text-primary">
+                    <p className="text-xl sm:text-2xl font-bold font-inter text-primary">
                       R{product.price}
                     </p>
                   </div>

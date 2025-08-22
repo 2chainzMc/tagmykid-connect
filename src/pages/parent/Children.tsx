@@ -35,17 +35,15 @@ export const Children = () => {
           {userChildren.map((child) => (
             <Card key={child.id} className="shadow-card border-0 hover:shadow-soft transition-shadow">
               <CardHeader className="pb-4">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-white font-poppins font-bold text-xl">
-                      {child.name.split(' ').map(n => n[0]).join('')}
-                    </div>
-                    <div>
-                      <CardTitle className="font-poppins text-xl">{child.name}</CardTitle>
-                      <CardDescription>{child.grade} • Class {child.class}</CardDescription>
-                    </div>
+                <div className="flex items-start space-x-4 mb-2">
+                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-white font-poppins font-bold text-lg shrink-0">
+                    {child.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                   </div>
-                  <Badge variant="outline" className="font-inter">
+                  <div className="min-w-0 flex-1">
+                    <CardTitle className="font-poppins text-xl truncate">{child.name}</CardTitle>
+                    <CardDescription>{child.grade} • Class {child.class}</CardDescription>
+                  </div>
+                  <Badge variant="outline" className="font-inter self-start">
                     {child.qrCode}
                   </Badge>
                 </div>

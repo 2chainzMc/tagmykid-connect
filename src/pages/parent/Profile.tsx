@@ -201,7 +201,7 @@ export const Profile = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="text-center p-4 bg-gradient-primary rounded-lg text-white">
-                <p className="font-poppins font-bold text-2xl">R50/month</p>
+                <p className="font-poppins font-bold text-xl sm:text-2xl mb-1">R50/month</p>
                 <p className="text-sm opacity-90">Premium Plan</p>
               </div>
               

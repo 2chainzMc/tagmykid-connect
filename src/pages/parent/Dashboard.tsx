@@ -29,7 +29,7 @@ export const Dashboard = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card className="shadow-card border-0">
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-inter font-bold text-primary">
+            <div className="text-xl sm:text-2xl font-inter font-bold text-primary">
               {userChildren.length}
             </div>
             <div className="text-sm text-muted-foreground">Children</div>
@@ -38,7 +38,7 @@ export const Dashboard = () => {
         
         <Card className="shadow-card border-0">
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-inter font-bold text-secondary">
+            <div className="text-xl sm:text-2xl font-inter font-bold text-secondary">
               {pendingOrders.length}
             </div>
             <div className="text-sm text-muted-foreground">Pending Orders</div>
@@ -47,7 +47,7 @@ export const Dashboard = () => {
         
         <Card className="shadow-card border-0">
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-inter font-bold text-success">
+            <div className="text-xl sm:text-2xl font-inter font-bold text-success">
               R50
             </div>
             <div className="text-sm text-muted-foreground">Monthly Plan</div>

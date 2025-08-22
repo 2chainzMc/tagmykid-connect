@@ -31,14 +31,14 @@ export const Orders = () => {
   return (
     <div className="p-4 space-y-6 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 md:items-center justify-between">
         <div>
           <h1 className="font-poppins text-3xl font-bold text-foreground">Order History</h1>
           <p className="text-muted-foreground font-nunito">
             Track your school store purchases and deliveries
           </p>
         </div>
-        <Button className="bg-gradient-primary border-0">
+        <Button className="bg-gradient-primary border-0 self-start md:self-center">
           <ShoppingCart className="w-4 h-4 mr-2" />
           Continue Shopping
         </Button>
@@ -61,12 +61,12 @@ export const Orders = () => {
                       <span>{order.items.length} item{order.items.length !== 1 ? 's' : ''}</span>
                     </CardDescription>
                   </div>
-                  <div className="flex items-center space-x-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                     <Badge className={getStatusColor(order.status)}>
                       {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                     </Badge>
                     <div className="text-right">
-                      <p className="text-2xl font-bold font-inter text-primary">R{order.total}</p>
+                      <p className="text-xl sm:text-2xl font-bold font-inter text-primary">R{order.total}</p>
                     </div>
                   </div>
                 </div>
@@ -170,7 +170,7 @@ export const Orders = () => {
         
         <Card className="shadow-card border-0 text-center">
           <CardContent className="p-4">
-            <div className="text-2xl font-bold font-inter text-primary">
+            <div className="text-xl sm:text-2xl font-bold font-inter text-primary">
               R{userOrders.reduce((sum, order) => sum + order.total, 0)}
             </div>
             <div className="text-sm text-muted-foreground">Total Spent</div>

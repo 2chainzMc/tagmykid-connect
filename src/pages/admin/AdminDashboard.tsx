@@ -55,7 +55,7 @@ export const AdminDashboard = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Total Learners</p>
-                <p className="text-3xl font-bold font-inter text-primary">{mockStats.totalLearners}</p>
+                <p className="text-xl sm:text-3xl font-bold font-inter text-primary">{mockStats.totalLearners}</p>
               </div>
               <Users className="w-8 h-8 text-primary opacity-60" />
             </div>
@@ -71,7 +71,7 @@ export const AdminDashboard = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Today's Scans</p>
-                <p className="text-3xl font-bold font-inter text-secondary">{mockStats.todayScans}</p>
+                <p className="text-xl sm:text-3xl font-bold font-inter text-secondary">{mockStats.todayScans}</p>
               </div>
               <ScanLine className="w-8 h-8 text-secondary opacity-60" />
             </div>
@@ -86,7 +86,7 @@ export const AdminDashboard = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Pending Orders</p>
-                <p className="text-3xl font-bold font-inter text-destructive">{mockStats.pendingOrders}</p>
+                <p className="text-xl sm:text-3xl font-bold font-inter text-destructive">{mockStats.pendingOrders}</p>
               </div>
               <ShoppingCart className="w-8 h-8 text-destructive opacity-60" />
             </div>
@@ -101,7 +101,7 @@ export const AdminDashboard = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Monthly Revenue</p>
-                <p className="text-3xl font-bold font-inter text-success">R{mockStats.monthlyRevenue.toLocaleString()}</p>
+                <p className="text-xl sm:text-3xl font-bold font-inter text-success">R{mockStats.monthlyRevenue.toLocaleString()}</p>
               </div>
               <DollarSign className="w-8 h-8 text-success opacity-60" />
             </div>
