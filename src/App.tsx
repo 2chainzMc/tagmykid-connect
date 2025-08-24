@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { Login } from "./pages/auth/Login";
 import { ParentLayout } from "./components/layout/ParentLayout";
@@ -20,9 +20,15 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const ProtectedRoute = ({ children, allowedRoles }: { children: React.ReactNode; allowedRoles: string[] }) => {
+const ProtectedRoute = ({
+  children,
+  allowedRoles,
+}: {
+  children: React.ReactNode;
+  allowedRoles: string[];
+}) => {
   const { user, isLoading } = useAuth();
-  
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -30,15 +36,15 @@ const ProtectedRoute = ({ children, allowedRoles }: { children: React.ReactNode;
       </div>
     );
   }
-  
+
   if (!user) {
     return <Navigate to="/login" replace />;
   }
-  
-  if (!allowedRoles.includes(user.role || '')) {
+
+  if (!allowedRoles.includes(user.role || "")) {
     return <Navigate to="/login" replace />;
   }
-  
+
   return <>{children}</>;
 };
 
@@ -48,12 +54,12 @@ const AppRoutes = () => {
       {/* Public Routes */}
       <Route path="/" element={<Index />} />
       <Route path="/login" element={<Login />} />
-      
+
       {/* Parent Routes */}
-      <Route 
-        path="/parent" 
+      <Route
+        path="/parent"
         element={
-          <ProtectedRoute allowedRoles={['parent']}>
+          <ProtectedRoute allowedRoles={["parent"]}>
             <ParentLayout />
           </ProtectedRoute>
         }
@@ -65,12 +71,14 @@ const AppRoutes = () => {
         <Route path="profile" element={<Profile />} />
         <Route index element={<Navigate to="/parent/dashboard" replace />} />
       </Route>
-      
+
       {/* Admin Routes */}
-      <Route 
-        path="/admin" 
+      <Route
+        path="/admin"
         element={
-          <ProtectedRoute allowedRoles={['admin', 'staff', 'shop_manager']}>
+          <ProtectedRoute
+            allowedRoles={["admin", "staff", "shop_manager"]}
+          >
             <AdminLayout />
           </ProtectedRoute>
         }
@@ -80,7 +88,7 @@ const AppRoutes = () => {
         <Route path="scan" element={<QRScanner />} />
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
       </Route>
-      
+
       {/* 404 */}
       <Route path="*" element={<NotFound />} />
     </Routes>
@@ -93,9 +101,10 @@ const App = () => (
       <Toaster />
       <Sonner />
       <AuthProvider>
-        <BrowserRouter>
+        {/* Switch to HashRouter for GitHub Pages */}
+        <HashRouter>
           <AppRoutes />
-        </BrowserRouter>
+        </HashRouter>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
