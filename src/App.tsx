@@ -101,7 +101,6 @@ const App = () => (
       <Toaster />
       <Sonner />
       <AuthProvider>
-        {/* Switch to HashRouter for GitHub Pages */}
         <HashRouter>
           <AppRoutes />
         </HashRouter>
