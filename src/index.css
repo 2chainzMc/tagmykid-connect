@@ -8,54 +8,55 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* TagMyKid Brand Colors */
-    --background: 250 100% 98%;
-    --foreground: 215 25% 27%;
+    /* Modern TagMyKid Brand Colors */
+    --background: 0 0% 98%;
+    --foreground: 215 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 27%;
+    --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 27%;
+    --popover-foreground: 215 25% 15%;
 
-    /* Primary: School-friendly blue */
-    --primary: 211 83% 53%;
+    /* Primary: Clean teal */
+    --primary: 184 77% 34%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 211 83% 65%;
+    --primary-light: 184 77% 45%;
 
-    /* Secondary: Warm orange for accents */
-    --secondary: 25 95% 65%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary: Soft gray */
+    --secondary: 210 11% 96%;
+    --secondary-foreground: 215 25% 15%;
 
-    /* Success: Kid-friendly green */
+    /* Success: Fresh green */
     --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
 
     /* Muted backgrounds */
-    --muted: 250 50% 96%;
+    --muted: 210 11% 96%;
     --muted-foreground: 215 16% 47%;
 
-    /* Accent: Lighter blue */
-    --accent: 211 83% 95%;
-    --accent-foreground: 215 25% 27%;
+    /* Accent: Light teal */
+    --accent: 184 77% 95%;
+    --accent-foreground: 184 77% 34%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 250 30% 88%;
-    --input: 250 30% 88%;
-    --ring: 211 83% 53%;
+    --border: 214 13% 92%;
+    --input: 214 13% 92%;
+    --ring: 184 77% 34%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* TagMyKid Custom Properties */
-    --gradient-primary: linear-gradient(135deg, hsl(211 83% 53%), hsl(211 83% 65%));
+    /* Enhanced Custom Properties */
+    --gradient-primary: linear-gradient(135deg, hsl(184 77% 34%), hsl(184 77% 45%));
     --gradient-warm: linear-gradient(135deg, hsl(25 95% 65%), hsl(35 95% 70%));
-    --shadow-soft: 0 4px 20px -4px hsl(211 83% 53% / 0.15);
-    --shadow-card: 0 2px 10px -2px hsl(215 25% 27% / 0.1);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-soft: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 248 250 252;
 
     --sidebar-foreground: 240 5.3% 26.1%;
 

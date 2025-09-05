@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,10 +6,12 @@ import { Badge } from '@/components/ui/badge';
 import { Plus, QrCode, Edit, Trash2 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { mockChildren } from '@/data/mockData';
+import { AddChildDialog } from '@/components/AddChildDialog';
 
 export const Children = () => {
   const { user } = useAuth();
   const userChildren = mockChildren.filter(child => child.parentId === user?.id);
+  const [isAddChildOpen, setIsAddChildOpen] = useState(false);
 
   return (
     <div className="p-4 space-y-6 max-w-4xl mx-auto">
@@ -21,11 +23,9 @@ export const Children = () => {
             Manage your children's profiles and safety information
           </p>
         </div>
-        <Button asChild className="bg-gradient-primary border-0">
-          <Link to="/child/add">
-            <Plus className="w-4 h-4 mr-2" />
-            Add Child
-          </Link>
+        <Button onClick={() => setIsAddChildOpen(true)} className="bg-gradient-primary border-0">
+          <Plus className="w-4 h-4 mr-2" />
+          Add Child
         </Button>
       </div>
 
@@ -100,11 +100,9 @@ export const Children = () => {
               Start by adding your first child to TagMyKid. You'll be able to generate QR codes, 
               track their school activities, and manage their safety information.
             </p>
-            <Button asChild className="bg-gradient-primary border-0">
-              <Link to="/child/add">
-                <Plus className="w-4 h-4 mr-2" />
-                Add Your First Child
-              </Link>
+            <Button onClick={() => setIsAddChildOpen(true)} className="bg-gradient-primary border-0">
+              <Plus className="w-4 h-4 mr-2" />
+              Add Your First Child
             </Button>
           </CardContent>
         </Card>

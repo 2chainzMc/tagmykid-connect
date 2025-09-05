@@ -1,35 +1,22 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  CreditCard, 
-  Shield, 
-  CheckCircle,
-  Edit,
-  Save,
-  X
-} from 'lucide-react';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 
 export const Profile = () => {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    name: user?.name || '',
-    email: user?.email || '',
-    phone: '+27 82 123 4567',
-    address: '123 Oak Street, Cape Town, 8001',
-    emergencyContact: 'John Johnson - +27 83 765 4321'
+    username: 'google_user_6590',
+    fullName: user?.name || 'Google User',
+    phone: '123-555-6591',
+    school: 'oakwood'
   });
 
   const handleSave = () => {
@@ -37,213 +24,118 @@ export const Profile = () => {
       title: "Profile updated",
       description: "Your information has been saved successfully.",
     });
-    setIsEditing(false);
-  };
-
-  const handleCancel = () => {
-    setFormData({
-      name: user?.name || '',
-      email: user?.email || '',
-      phone: '+27 82 123 4567',
-      address: '123 Oak Street, Cape Town, 8001',
-      emergencyContact: 'John Johnson - +27 83 765 4321'
-    });
-    setIsEditing(false);
   };
 
   return (
-    <div className="p-4 space-y-6 max-w-4xl mx-auto">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="font-poppins text-3xl font-bold text-foreground">My Profile</h1>
-          <p className="text-muted-foreground font-nunito">
-            Manage your account information and settings
-          </p>
-        </div>
-      </div>
+    <div className="space-y-8">
+      <Card className="shadow-card border-border">
+        <CardHeader className="pb-6">
+          <CardTitle className="text-3xl font-bold text-foreground">User Administration</CardTitle>
+          <div className="h-1 w-24 bg-primary rounded-full"></div>
+        </CardHeader>
+        <CardContent className="space-y-8">
+          <div className="flex flex-col items-center space-y-6">
+            <div className="relative">
+              <Avatar className="h-32 w-32 border-4 border-primary/20">
+                <AvatarFallback className="text-2xl bg-primary text-primary-foreground">
+                  {user?.name?.charAt(0) || 'U'}
+                </AvatarFallback>
+              </Avatar>
+            </div>
+            <Button variant="secondary" className="w-full max-w-sm rounded-xl py-3 text-base font-medium">
+              Change Picture
+            </Button>
+          </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        {/* Profile Information */}
-        <Card className="md:col-span-2 shadow-card border-0">
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="font-poppins text-xl">Personal Information</CardTitle>
-                <CardDescription>Keep your contact details up to date</CardDescription>
-              </div>
-              {!isEditing ? (
-                <Button variant="outline" onClick={() => setIsEditing(true)}>
-                  <Edit className="w-4 h-4 mr-2" />
-                  Edit
-                </Button>
-              ) : (
-                <div className="flex space-x-2">
-                  <Button size="sm" onClick={handleSave} className="bg-gradient-primary border-0">
-                    <Save className="w-4 h-4 mr-1" />
-                    Save
-                  </Button>
-                  <Button variant="outline" size="sm" onClick={handleCancel}>
-                    <X className="w-4 h-4 mr-1" />
-                    Cancel
-                  </Button>
-                </div>
-              )}
+          <div className="grid gap-6 max-w-2xl">
+            <div className="space-y-3">
+              <Label htmlFor="username" className="text-base font-medium text-foreground">Username</Label>
+              <Input 
+                id="username"
+                value={formData.username}
+                onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
+                className="bg-muted/30 border-border rounded-xl h-12 text-base"
+              />
             </div>
-          </CardHeader>
-          
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <div className="flex items-center space-x-2">
-                  <User className="w-4 h-4 text-muted-foreground" />
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData(prev => ({...prev, name: e.target.value}))}
-                    disabled={!isEditing}
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
-                <div className="flex items-center space-x-2">
-                  <Mail className="w-4 h-4 text-muted-foreground" />
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData(prev => ({...prev, email: e.target.value}))}
-                    disabled={!isEditing}
-                  />
-                </div>
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="phone">Phone Number</Label>
-              <div className="flex items-center space-x-2">
-                <Phone className="w-4 h-4 text-muted-foreground" />
-                <Input
-                  id="phone"
-                  value={formData.phone}
-                  onChange={(e) => setFormData(prev => ({...prev, phone: e.target.value}))}
-                  disabled={!isEditing}
-                />
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="address">Home Address</Label>
-              <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4 text-muted-foreground" />
-                <Input
-                  id="address"
-                  value={formData.address}
-                  onChange={(e) => setFormData(prev => ({...prev, address: e.target.value}))}
-                  disabled={!isEditing}
-                />
-              </div>
-            </div>
-            
-            <Separator />
-            
-            <div className="space-y-2">
-              <Label htmlFor="emergency">Emergency Contact</Label>
-              <div className="flex items-center space-x-2">
-                <Shield className="w-4 h-4 text-muted-foreground" />
-                <Input
-                  id="emergency"
-                  value={formData.emergencyContact}
-                  onChange={(e) => setFormData(prev => ({...prev, emergencyContact: e.target.value}))}
-                  disabled={!isEditing}
-                />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* Quick Info & Subscription */}
-        <div className="space-y-6">
-          {/* Account Status */}
-          <Card className="shadow-card border-0">
-            <CardHeader>
-              <CardTitle className="font-poppins text-lg flex items-center">
-                <CheckCircle className="w-5 h-5 text-success mr-2" />
-                Account Status
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
+            <div className="space-y-3">
+              <Label htmlFor="fullName" className="text-base font-medium text-foreground">Full Name</Label>
+              <Input 
+                id="fullName"
+                value={formData.fullName}
+                onChange={(e) => setFormData(prev => ({ ...prev, fullName: e.target.value }))}
+                className="bg-foreground text-background rounded-xl h-12 text-base font-medium"
+              />
+            </div>
+
+            <div className="space-y-3">
+              <Label htmlFor="phone" className="text-base font-medium text-foreground">Phone Number</Label>
+              <Input 
+                id="phone"
+                value={formData.phone}
+                onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                className="bg-foreground text-background rounded-xl h-12 text-base font-medium"
+              />
+            </div>
+
+            <div className="space-y-3">
+              <Label htmlFor="school" className="text-base font-medium text-foreground">School</Label>
+              <Select value={formData.school} onValueChange={(value) => setFormData(prev => ({ ...prev, school: value }))}>
+                <SelectTrigger className="bg-foreground text-background rounded-xl h-12 text-base font-medium border-none">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-card border-border rounded-xl">
+                  <SelectItem value="oakwood">Oakwood Elementary</SelectItem>
+                  <SelectItem value="pine-valley">Pine Valley Primary</SelectItem>
+                  <SelectItem value="maple-ridge">Maple Ridge School</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <div className="flex gap-4 pt-6 max-w-2xl">
+            <Button onClick={handleSave} className="flex-1 bg-primary hover:bg-primary-light text-primary-foreground rounded-xl h-12 text-base font-medium">
+              Save Changes
+            </Button>
+            <Button variant="outline" className="flex-1 border-border rounded-xl h-12 text-base font-medium">
+              Reset
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="shadow-card border-border">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-2xl font-semibold text-foreground">Subscription Management</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-6">
+            <div className="bg-muted/30 rounded-xl p-6 border border-border">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Verification</span>
-                <Badge className="bg-success text-success-foreground">Verified</Badge>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Member Since</span>
-                <span className="text-sm font-medium">Jan 2024</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Children</span>
-                <span className="text-sm font-medium">2 registered</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Subscription */}
-          <Card className="shadow-card border-0">
-            <CardHeader>
-              <CardTitle className="font-poppins text-lg flex items-center">
-                <CreditCard className="w-5 h-5 text-primary mr-2" />
-                Subscription
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center p-4 bg-gradient-primary rounded-lg text-white">
-                <p className="font-poppins font-bold text-xl sm:text-2xl mb-1">R50/month</p>
-                <p className="text-sm opacity-90">Premium Plan</p>
-              </div>
-              
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Next billing</span>
-                  <span className="font-medium">Feb 22, 2024</span>
+                <div>
+                  <p className="font-semibold text-lg text-foreground">Family Plan</p>
+                  <p className="text-muted-foreground">R50/month • Renews 06/09/2026</p>
                 </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Status</span>
-                  <Badge className="bg-success text-success-foreground">Active</Badge>
-                </div>
+                <Badge className="bg-success text-success-foreground px-4 py-2 text-sm font-medium">Active</Badge>
               </div>
-              
-              <Button variant="outline" className="w-full">
-                Manage Subscription
-              </Button>
-            </CardContent>
-          </Card>
+            </div>
+            <Button variant="outline" className="w-full rounded-xl h-12 text-base font-medium border-border">
+              Manage Subscription
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
-          {/* Quick Actions */}
-          <Card className="shadow-card border-0">
-            <CardHeader>
-              <CardTitle className="font-poppins text-lg">Quick Actions</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <Button variant="outline" className="w-full justify-start">
-                <Shield className="w-4 h-4 mr-2" />
-                Change Password
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <Mail className="w-4 h-4 mr-2" />
-                Email Preferences
-              </Button>
-              <Button variant="outline" className="w-full justify-start text-destructive hover:text-destructive">
-                <X className="w-4 h-4 mr-2" />
-                Delete Account
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+      <Card className="shadow-card border-border">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-2xl font-semibold text-foreground">Order History</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-center py-8">
+            <p className="text-muted-foreground text-lg">You have no past orders.</p>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
